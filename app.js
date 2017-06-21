@@ -21,9 +21,10 @@ app.use(bodyParser.json());
 app.use('/api', apiRoutes);
 
 app.get('/', function(req, res) {
-    res.sendfile('./static/index.html');
+    res.sendFile(path.join(__dirname, './static/index.html'));
 });
 
-app.listen(3000, function () {
-    console.log('Express running on http://localhost:3000/.')
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+    console.log('Express running on http://localhost:' + port + '/.')
 });
