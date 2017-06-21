@@ -4,3 +4,5 @@ To run this code, make sure you have MongoDB running locally on your machine, th
 
 * `npm install`
 * `node app.js`
+
+[Download this code as a ZIP file.](https://github.com/tiycnd/bcbsnc-mean-lab/archive/master.zip)
