@@ -17,7 +17,7 @@ const jsonError = function (res, err) {
 }
 
 router.get('/todos', function (req, res) {
-    Todo.find({}, function (err, todos) {
+    Todo.find({}, null, {sort: {done: 1, _id: -1}}, function (err, todos) {
         if (err) return jsonError(res, err);
 
         jsonSuccess(res, {
@@ -40,6 +40,22 @@ router.post('/todos', function (req, res) {
     })
 });
 
+router.delete('/todos', function (req, res) {
+    if (req.query['cleanup']) {
+        Todo.deleteMany({done: true}, function (err) {
+            if (err) return jsonError(res, err);
+
+            jsonSuccess(res, {
+                deleted: true
+            });
+        })
+    } else {
+        res.status(400).json({
+            "status": "fail"
+        });
+    }
+});
+
 router.get('/todos/:id', function (req, res) {
     Todo.findById(req.params.id, function (err, todo) {
         if (err) return jsonError(res, err);
@@ -50,7 +66,7 @@ router.get('/todos/:id', function (req, res) {
             });
         } else {
             res.status(404).json({
-                "status": fail,
+                "status": "fail",
                 "data": {
                     "id": "There is no todo with that ID."
                 }
@@ -74,7 +90,7 @@ router.put('/todos/:id', function (req, res) {
             });
         } else {
             res.status(404).json({
-                "status": fail,
+                "status": "fail",
                 "data": {
                     "id": "There is no todo with that ID."
                 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/todo.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
+    <script src="/static/todo.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">My todo list</h1>
+            <div ng-app="todolist" ng-controller="TodoController">
+                <form ng-submit="create(todo)" class="add-todo">
+                    <input type="text" class="input" placeholder="Add a new todo" ng-model="todo.descr" />
+                </form>
+
+                <ul class="todo-list">
+                    <li ng-repeat="todo in todos">
+                        <input type="checkbox" ng-model="todo.done" ng-click="update(todo)" ng-checked="{{todo.done}}" /> {{todo.descr}}
+                    </li>
+                </ul>
+
+                <button class="button is-danger" ng-click="cleanup()">Remove completed todos</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,1 +1,9 @@
-<h1>Hello</h1>
+<div ng-app="todolist" ng-controller="TodoController as todos">
+  <div class="content">
+  <h1>Hi</h1>
+  <ul>
+  <li ng-repeat="todo in todos.all">
+    {{todo.descr}}
+  </li>
+  </div>
+</div>
